@@ -42,59 +42,71 @@ struct DailyForecastRow: View {
     let isExpanded: Bool
 
     var body: some View {
-        HStack(spacing: 8) {
-            // Date label: "Today" or "Thu Jun 4"
+        HStack(alignment: .center, spacing: 8) {
+            // Date: stacked "Wed" / "Jun 10", or "Today" centered
             dateLabel
-                .frame(width: 76, alignment: .leading)
+                .frame(width: 52, alignment: .leading)
 
-            // Condition icon + description
+            // Condition icon
             weatherIcon
                 .frame(width: 28)
+
+            // Condition text
             Text(conditionText)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Precip
-            if let precip = precipPercent {
-                HStack(spacing: 2) {
-                    Image(systemName: "drop.fill").foregroundStyle(.blue).font(.caption)
-                    Text("\(precip)%").font(.caption).foregroundStyle(.secondary)
-                }
-                .frame(width: 44)
-            } else {
-                Spacer().frame(width: 44)
-            }
-
-            // Temps
-            HStack(spacing: 4) {
-                Text(day.maxTemperature?.displayString ?? "--")
-                    .font(.subheadline.weight(.semibold))
-                Text(day.minTemperature?.displayString ?? "--")
-                    .font(.subheadline)
+            // Precip — fixed width, right-aligned
+            HStack(spacing: 2) {
+                Image(systemName: "drop.fill")
+                    .foregroundStyle(.blue)
+                    .font(.caption)
+                Text(precipPercent.map { "\($0)%" } ?? "")
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            .frame(width: 44, alignment: .trailing)
+
+            // High / Low — fixed widths so they always line up
+            Text(day.maxTemperature?.displayString ?? "--")
+                .font(.subheadline.weight(.semibold))
+                .frame(width: 32, alignment: .trailing)
+            Text(day.minTemperature?.displayString ?? "--")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .frame(width: 32, alignment: .trailing)
 
             Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
     }
 
     private var dateLabel: some View {
-        Text(dateLabelString)
-            .font(.subheadline.weight(.medium))
-    }
-
-    private var dateLabelString: String {
-        guard let date = day.displayDate.date else { return "" }
-        if Calendar.current.isDateInToday(date) { return "Today" }
-        let dow = date.formatted(.dateTime.weekday(.abbreviated))
-        let mon = date.formatted(.dateTime.month(.abbreviated))
-        let d   = date.formatted(.dateTime.day())
-        return "\(dow) \(mon) \(d)"
+        guard let date = day.displayDate.date else {
+            return AnyView(Text("").font(.subheadline))
+        }
+        if Calendar.current.isDateInToday(date) {
+            return AnyView(
+                Text("Today")
+                    .font(.subheadline.weight(.medium))
+            )
+        }
+        let dow = date.formatted(.dateTime.weekday(.abbreviated))  // "Wed"
+        let mon = date.formatted(.dateTime.month(.abbreviated))    // "Jun"
+        let d   = date.formatted(.dateTime.day())                  // "10"
+        return AnyView(
+            VStack(alignment: .leading, spacing: 0) {
+                Text(dow)
+                    .font(.subheadline.weight(.medium))
+                Text("\(mon) \(d)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        )
     }
 
     private var conditionText: String {
