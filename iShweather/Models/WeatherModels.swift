@@ -6,8 +6,12 @@ struct Temperature: Codable {
     let degrees: Double
     let unit: String
 
+    var fahrenheit: Double {
+        unit.uppercased().contains("CELSIUS") ? degrees * 9 / 5 + 32 : degrees
+    }
+
     var displayString: String {
-        "\(Int(degrees.rounded()))°"
+        "\(Int(fahrenheit.rounded()))°"
     }
 }
 
@@ -15,6 +19,16 @@ struct WindInfo: Codable {
     struct Speed: Codable {
         let value: Double
         let unit: String
+
+        var mph: Double {
+            switch unit.uppercased() {
+            case "KILOMETERS_PER_HOUR", "KMH": return value * 0.621371
+            case "METERS_PER_SECOND", "M_S":   return value * 2.23694
+            default:                            return value  // already mph
+            }
+        }
+
+        var displayString: String { "\(Int(mph.rounded())) mph" }
     }
     struct Direction: Codable {
         let degrees: Double?

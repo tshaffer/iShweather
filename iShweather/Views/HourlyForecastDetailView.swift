@@ -32,7 +32,7 @@ struct HourlyForecastDetailView: View {
                     detailCell(
                         icon: "wind",
                         label: "Wind",
-                        value: "\(Int(wind.speed.value.rounded())) \(wind.speed.unit)",
+                        value: wind.speed.displayString,
                         color: .secondary
                     )
                 }
