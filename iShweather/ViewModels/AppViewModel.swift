@@ -78,6 +78,10 @@ final class AppViewModel {
         addToRecents(location)
     }
 
+    func removeRecentLocation(_ location: ShweatherLocation) {
+        recentLocations.removeAll { $0.id == location.id }
+    }
+
     private func addToRecents(_ location: ShweatherLocation) {
         var recents = recentLocations.filter { $0.id != location.id }
         recents.insert(location, at: 0)

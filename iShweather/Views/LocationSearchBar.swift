@@ -68,13 +68,22 @@ struct LocationSearchBar: View {
                     .padding(.top, 4)
                 Spacer()
             }
-            List(vm.recentLocations) { location in
-                Button {
-                    vm.selectRecentLocation(location)
-                    showRecents = false
-                } label: {
-                    Label(location.friendlyName, systemImage: "clock")
-                        .foregroundStyle(.primary)
+            List {
+                ForEach(vm.recentLocations) { location in
+                    Button {
+                        vm.selectRecentLocation(location)
+                        showRecents = false
+                    } label: {
+                        Label(location.friendlyName, systemImage: "clock")
+                            .foregroundStyle(.primary)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            vm.removeRecentLocation(location)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
             }
             .listStyle(.plain)
