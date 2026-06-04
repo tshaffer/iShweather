@@ -127,7 +127,7 @@ struct DailyForecastRow: View {
             ?? day.nighttimeForecast?.weatherCondition?.type
             ?? ""
         return Image(systemName: sfSymbol(for: condition))
-            .symbolRenderingMode(.multicolor)
+            .foregroundStyle(iconColor(for: condition))
             .font(.title3)
     }
 }

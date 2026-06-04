@@ -41,7 +41,7 @@ struct HourlyForecastRow: View {
 
             // Icon
             Image(systemName: sfSymbol(for: hour.weatherCondition.type))
-                .symbolRenderingMode(.multicolor)
+                .foregroundStyle(iconColor(for: hour.weatherCondition.type))
                 .font(.title3)
                 .frame(width: 28)
 
