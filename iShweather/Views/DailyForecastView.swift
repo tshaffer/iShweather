@@ -4,9 +4,18 @@ struct DailyForecastView: View {
     let days: [DailyForecastDay]
     @State private var expandedId: String?
 
+    // Filter out any days before today (fixes the web app bug)
+    private var todayAndFuture: [DailyForecastDay] {
+        let startOfToday = Calendar.current.startOfDay(for: Date())
+        return days.filter { day in
+            guard let date = day.displayDate.date else { return false }
+            return date >= startOfToday
+        }
+    }
+
     var body: some View {
         List {
-            ForEach(days) { day in
+            ForEach(todayAndFuture) { day in
                 VStack(spacing: 0) {
                     DailyForecastRow(day: day, isExpanded: expandedId == day.id)
                         .contentShape(Rectangle())
@@ -34,10 +43,9 @@ struct DailyForecastRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            // Date
-            Text(dayLabel)
-                .frame(width: 44, alignment: .leading)
-                .font(.subheadline.weight(.medium))
+            // Date label: "Today" or "Thu Jun 4"
+            dateLabel
+                .frame(width: 76, alignment: .leading)
 
             // Condition icon + description
             weatherIcon
@@ -54,9 +62,9 @@ struct DailyForecastRow: View {
                     Image(systemName: "drop.fill").foregroundStyle(.blue).font(.caption)
                     Text("\(precip)%").font(.caption).foregroundStyle(.secondary)
                 }
-                .frame(width: 48)
+                .frame(width: 44)
             } else {
-                Spacer().frame(width: 48)
+                Spacer().frame(width: 44)
             }
 
             // Temps
@@ -75,11 +83,18 @@ struct DailyForecastRow: View {
         .padding(.vertical, 10)
     }
 
-    private var dayLabel: String {
+    private var dateLabel: some View {
+        Text(dateLabelString)
+            .font(.subheadline.weight(.medium))
+    }
+
+    private var dateLabelString: String {
         guard let date = day.displayDate.date else { return "" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = Calendar.current.isDateInToday(date) ? "'Today'" : "EEE"
-        return formatter.string(from: date)
+        if Calendar.current.isDateInToday(date) { return "Today" }
+        let dow = date.formatted(.dateTime.weekday(.abbreviated))
+        let mon = date.formatted(.dateTime.month(.abbreviated))
+        let d   = date.formatted(.dateTime.day())
+        return "\(dow) \(mon) \(d)"
     }
 
     private var conditionText: String {
