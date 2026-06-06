@@ -19,6 +19,7 @@
 		88DE6BE0721DD169AA9B677B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4251C296C3AE0A95192E1DF /* Location.swift */; };
 		A5180EEB1A10A57B7C26248E /* DailyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D7540C076BF89E9B35D5D /* DailyForecastView.swift */; };
 		B9D0CB55ED95D8DC50ABEA4B /* PlaceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BA254BC63519806E30426A /* PlaceModels.swift */; };
+		CB705CD90CCDD199FB45FAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794EB0F0F3CAAC0FC1137C09 /* Assets.xcassets */; };
 		CD5C6A312781553A8A03A23C /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800BAD23F5B9BF1D12E96738 /* HourlyForecastView.swift */; };
 		D4AB976E52AE13F85962FABF /* PlacesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE6104C66800065A1BE035 /* PlacesService.swift */; };
 		D72DA629A56976BBDEB5A076 /* LocationSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD322B847B64C5181876BA /* LocationSearchBar.swift */; };
@@ -26,13 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		066697A0F011CD5A07EE2B75 /* iShweather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShweather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		066697A0F011CD5A07EE2B75 /* iShweather.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iShweather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13BA254BC63519806E30426A /* PlaceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModels.swift; sourceTree = "<group>"; };
 		349707722A9F76E065A17EB9 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		3B8E4EF2E224707EE33F17C5 /* HourlyForecastDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastDetailView.swift; sourceTree = "<group>"; };
 		4DCD322B847B64C5181876BA /* LocationSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchBar.swift; sourceTree = "<group>"; };
 		52DE6104C66800065A1BE035 /* PlacesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesService.swift; sourceTree = "<group>"; };
 		69722C3AB8D19A71E78EF7A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		794EB0F0F3CAAC0FC1137C09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		800BAD23F5B9BF1D12E96738 /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		8CD3BFE29C1E16DBAC07A25D /* DailyForecastDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastDetailView.swift; sourceTree = "<group>"; };
 		8D3D7540C076BF89E9B35D5D /* DailyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		BB2284AAF79F894BB8ED6B1F /* iShweather */ = {
 			isa = PBXGroup;
 			children = (
+				794EB0F0F3CAAC0FC1137C09 /* Assets.xcassets */,
 				69722C3AB8D19A71E78EF7A7 /* Info.plist */,
 				BD80B7461A030AD0271EB595 /* iShweatherApp.swift */,
 				C8718065729D09511802CD59 /* Models */,
@@ -135,6 +138,7 @@
 			buildConfigurationList = 56FDBF11E5A0B2DF3AB31C3D /* Build configuration list for PBXNativeTarget "iShweather" */;
 			buildPhases = (
 				3C11A4E8C9FF4A70071C4595 /* Sources */,
+				D355D979C89EAFFCD0A36917 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -155,6 +159,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 33209C704E3DE580E94C8223 /* Build configuration list for PBXProject "iShweather" */;
 			developmentRegion = en;
@@ -174,6 +180,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D355D979C89EAFFCD0A36917 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB705CD90CCDD199FB45FAC1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C11A4E8C9FF4A70071C4595 /* Sources */ = {
@@ -207,7 +224,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = SNCCBFHL45;
 				INFOPLIST_FILE = iShweather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -226,7 +242,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = SNCCBFHL45;
 				INFOPLIST_FILE = iShweather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
